@@ -1,1 +1,6 @@
 @use "./start-button";
+
+.information {
+    display: flex;
+    flex-direction: row;
+}

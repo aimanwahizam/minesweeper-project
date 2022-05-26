@@ -1,3 +1,8 @@
+.information {
+  display: flex;
+  flex-direction: row;
+}
+
 .game__box {
   border: 2px solid red;
   background-color: black;

@@ -1,1 +1,1 @@
-{"version":3,"sources":["_game-box.scss","styles.css","_game.scss"],"names":[],"mappings":"AAAA;EACI,qBAAA;EACA,uBAAA;ACCJ;ADCI;EACI,uBAAA;ACCR;;ACJA,qFAAA;AACA;EACI,aAAA;EACA,YAAA;EACA,uBAAA;EACA,aAAA;EACA,sCAAA;EACA,mCAAA;ADOJ","file":"styles.css"}
+{"version":3,"sources":["_information.scss","styles.css","_game-box.scss","_game.scss"],"names":[],"mappings":"AAEA;EACI,aAAA;EACA,mBAAA;ACDJ;;ACHA;EACI,qBAAA;EACA,uBAAA;ADMJ;ACJI;EACI,uBAAA;ADMR;;AETA,qFAAA;AACA;EACI,aAAA;EACA,YAAA;EACA,uBAAA;EACA,aAAA;EACA,sCAAA;EACA,mCAAA;AFYJ","file":"styles.css"}
