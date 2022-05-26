@@ -1,0 +1,10 @@
+
+/* --------------------------------- Mobile <428px--------------------------------- */
+.game {
+    height: 25rem;
+    width: 25rem;
+    border: 2px solid black;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+}
