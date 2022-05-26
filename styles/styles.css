@@ -1,3 +1,11 @@
+.game__box {
+  border: 2px solid red;
+  background-color: black;
+}
+.game__box--click {
+  background-color: white;
+}
+
 /* --------------------------------- Mobile <428px--------------------------------- */
 .game {
   height: 25rem;
@@ -6,12 +14,4 @@
   display: grid;
   grid-template-columns: repeat(16, 1fr);
   grid-template-rows: repeat(16, 1fr);
-}
-
-.game__box {
-  border: 2px solid black;
-  background-color: black;
-}
-.game__box--click {
-  background-color: white;
 }/*# sourceMappingURL=styles.css.map */
