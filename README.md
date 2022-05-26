@@ -8,10 +8,10 @@ Should be a grid
   Make grid 16x16 for now 
     *CAN ADD OTHER DIFFICULTIES I.E. SMALLER AND BIGGER GRIDS*
 
-Grid should either:
-  1. be empty
-  2. have a bomb
-  3. or a number
+Grid should have a value of:
+  1. 0 - be empty
+  2. "bomb" have a bomb
+  3. or a number 1-8
 
 User should be able to put a flag on a grid 
 
@@ -24,3 +24,6 @@ On start button click, randomly generates x amount of bombs to be in grid
     blanks will fill the rest - so by default its blank
     
 *ADD TIMER AND COUNTER*
+
+16x16 game - 32 bombs
+
