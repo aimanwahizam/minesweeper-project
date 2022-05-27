@@ -42,13 +42,16 @@ const assignBombs = (gameBoxArray) => {
   console.log(`randomArray: ${randomArray}`);
 
   // foreach gamebox if id matches random number ADD class of bomb
-  // call randomnumberarray function
   const bombArray = [];
 
   randomArray.forEach((randomNumber) => {
-    const bomb = (document.getElementById(randomNumber).className += " bomb");
+    const bomb = document.getElementById(randomNumber);
+    bomb.className += " game__box__bomb";
+    bomb.innerHTML += " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
+
     bombArray.push(bomb);
   });
+  console.log(bombArray)
 };
 
 const onGameStart = () => {
@@ -61,8 +64,6 @@ const onGameStart = () => {
     gameBox.push(box);
   });
 
-  console.log(gameBox);
-
   assignBombs(gameBox);
 };
 
@@ -71,8 +72,3 @@ const onGameStart = () => {
 /* -------------------------------------------------------------------------- */
 
 startButton.addEventListener("click", onGameStart);
-// startButton.addEventListener(
-//   "click",
-//   generateRandomNumbersArray(32, 16, randomNumberArray)
-// );
-// startButton.addEventListener("click", assignBombs(randomNumberArray, gameBox));

@@ -10,6 +10,10 @@
 .game__box--click {
   background-color: white;
 }
+.game__box__icon {
+  width: 100%;
+  height: 100%;
+}
 
 /* --------------------------------- Mobile <428px--------------------------------- */
 .game {
