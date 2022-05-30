@@ -39,7 +39,7 @@ const generateRandomNumbersArray = (numberOfBombs, numberOfRows, array) => {
 
 const assignBombs = () => {
   generateRandomNumbersArray(32, 16, randomArray);
-  console.log(`randomArray: ${randomArray}`);
+  // console.log(`randomArray: ${randomArray}`);
 
   // foreach gamebox if id matches random number ADD class of bomb
   const bombArray = [];
@@ -52,7 +52,7 @@ const assignBombs = () => {
 
     bombArray.push(bomb);
   });
-  console.log(bombArray);
+  // console.log(bombArray);
   return randomArray;
 };
 
@@ -118,12 +118,12 @@ const assignNumbersAndSpaces = (array, randomArr) => {
   console.log(notBombsArray);
 
   notBombsArray.forEach((notBomb) => {
-    console.log(notBomb.id);
+    // console.log(notBomb.id);
     const relativePositionArray = findRelativePositionByID(
       parseInt(notBomb.id)
     );
-    console.log(relativePositionArray);
-    console.log(randomArr);
+    // console.log(relativePositionArray);
+    // console.log(randomArr);
 
     const relativeBombArray = [];
 
@@ -134,12 +134,35 @@ const assignNumbersAndSpaces = (array, randomArr) => {
           : null;
       });
     });
-    console.log(relativeBombArray);
+    // console.log(relativeBombArray);
 
     const counter = relativeBombArray.length;
     
-    if (counter > 0) {
-      notBomb.innerHTML += `<div class="number">${counter}</div>`;
+    switch (true) {
+      case counter === 1:
+        notBomb.innerHTML += `<div class="number--one">${counter}</div>`;
+        break;
+      case counter === 2:
+        notBomb.innerHTML += `<div class="number--two">${counter}</div>`;
+        break;
+      case counter === 3:
+        notBomb.innerHTML += `<div class="number--three">${counter}</div>`;
+        break;
+      case counter === 4:
+        notBomb.innerHTML += `<div class="number--four">${counter}</div>`;
+        break;
+      case counter === 5:
+        notBomb.innerHTML += `<div class="number--five">${counter}</div>`;
+        break;
+      case counter === 6:
+        notBomb.innerHTML += `<div class="number--six">${counter}</div>`;
+        break;
+      case counter === 7:
+        notBomb.innerHTML += `<div class="number--seven">${counter}</div>`;
+        break;
+      case counter === 8:
+        notBomb.innerHTML += `<div class="number--eight">${counter}</div>`;
+        break;
     }
   });
 };

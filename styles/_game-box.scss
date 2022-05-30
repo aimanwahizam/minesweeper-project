@@ -1,6 +1,8 @@
+@use "./variables" as *;
+
 .game__box {
-    border: 2px solid red;
-    background-color: black;
+    border: 1px solid red;
+    background-color: $color-background;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -11,7 +13,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        background-color: white;
+        background-color: $color-background-click;
         width: 96%;
         height: 96%;
     }
@@ -24,4 +26,38 @@
 
 .number {
     font-size: 1rem;
+    font-family: $font-primary;
+    color: $color-background;
+
+    &--one {
+        color: $color-one;
+    }
+
+    &--two {
+        color: $color-two;
+    }
+
+    &--three {
+        color: $color-three;
+    }
+
+    &--four {
+        color: $color-four;
+    }
+
+    &--five {
+        color: $color-five;
+    }
+
+    &--six {
+        color: $color-six;
+    }
+
+    &--seven {
+        color: $color-seven;
+    }
+
+    &--eight {
+        color: $color-eight;
+    }
 }
