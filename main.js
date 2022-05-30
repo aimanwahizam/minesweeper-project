@@ -7,12 +7,13 @@ const game = document.querySelector(".game");
 const gameBox = []; // ARRAY OF BOXES TO BE STORED
 const startButton = document.querySelector(".start-button");
 
-const randomNumberArray = [];
+const randomArray = [];
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 
+// Clicking on boxes
 const onClickGameBox = (event) => {
   event.target.className += " game__box--click";
   console.log(event.target);
@@ -24,6 +25,7 @@ const addGameBoxEventListeners = (array) => {
   });
 };
 
+// Generate content of boxes
 const generateRandomNumbersArray = (numberOfBombs, numberOfRows, array) => {
   // generate an array of numberOfBombs random numbers from 1 - numberofRows ** 2
   // make sure no two same random numbers
@@ -36,7 +38,6 @@ const generateRandomNumbersArray = (numberOfBombs, numberOfRows, array) => {
 };
 
 const assignBombs = () => {
-  const randomArray = [];
   generateRandomNumbersArray(32, 16, randomArray);
   console.log(`randomArray: ${randomArray}`);
 
@@ -46,18 +47,102 @@ const assignBombs = () => {
   randomArray.forEach((randomNumber) => {
     const bomb = document.getElementById(randomNumber);
     bomb.className += " game__box__bomb";
-    bomb.innerHTML += " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
+    bomb.innerHTML +=
+      " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
 
     bombArray.push(bomb);
   });
-  console.log(bombArray)
+  console.log(bombArray);
+  return randomArray;
 };
 
-const assignNumbersAndSpaces = (array) => {
-  const notBombsArray = array.filter(box => box.className != "game__box game__box__bomb");
-  console.log(notBombsArray);
-}
+const findRelativePositionByID = (id) => {
+  let relativePosition = [];
+  
+  switch (true) {
+    case (id === 1):
+      console.log("caught")
+      relativePosition = [id + 1, id + 16, id + 17];
+      break;
+    case id === 16:
+      relativePosition = [id - 1, id + 15, id + 16];
+      break;
+    case id === 241:
+      relativePosition = [id - 16, id - 15, id + 1];
+      break;
+    case id === 256:
+      relativePosition = [id - 17, id - 16, id - 1];
+      break;
 
+    // Top Row
+    case id > 1 && id < 16:
+      relativePosition = [id - 1, id + 1, id + 15, id + 16, id + 17];
+      break;
+
+    // Left Column
+    case id % 16 === 1 && id != 1 && id != 241:
+      relativePosition = [id - 16, id - 15, id + 1, id + 16, id + 17];
+      break;
+
+    // Right Column
+    case id % 16 === 0 && id != 16 && id != 256:
+      relativePosition = [id - 17, id - 16, id - 1, id + 15, id + 16];
+      break;
+
+    // Bottom Row
+    case id > 241 && id < 256:
+      relativePosition = [id - 17, id - 16, id - 15, id - 1, id + 1];
+      break;
+
+    // Rest of boxes
+    default:
+      console.log("default")
+      relativePosition = [
+        id - 17,
+        id - 16,
+        id - 15,
+        id - 1,
+        id + 1,
+        id + 15,
+        id + 16,
+        id + 17,
+      ];
+      break;
+  }
+
+  return relativePosition;
+};
+
+const assignNumbersAndSpaces = (array, randomArr) => {
+  const notBombsArray = array.filter(
+    (box) => box.className != "game__box game__box__bomb"
+  );
+  console.log(notBombsArray);
+
+  notBombsArray.forEach((notBomb) => {
+    let counter = 0;
+
+    console.log(notBomb.id)
+    const relativePositionArray = findRelativePositionByID(parseInt(notBomb.id));
+    console.log(relativePositionArray);
+    // console.log(relativePositionArray.length);
+
+    const relativeBombArray = randomArr.filter(randomNumber => {
+      relativePositionArray.includes(randomNumber);
+    })
+    // console.log(relativeBombArray);
+  });
+  // console.log(relativePositionArray);
+
+  // relativePositionArray.forEach((position) => {
+  //   randomArr.includes(position);
+  //   counter++;
+  // });
+  // console.log(counter);
+  // return counter;
+};
+
+// Game
 const onGameStart = () => {
   for (let index = 1; index < 16 ** 2 + 1; index++) {
     game.innerHTML += `<div class="game__box" id="${index}"></div>`;
@@ -69,7 +154,7 @@ const onGameStart = () => {
   });
 
   assignBombs();
-  assignNumbersAndSpaces(gameBox);
+  assignNumbersAndSpaces(gameBox, randomArray);
 };
 
 /* -------------------------------------------------------------------------- */
