@@ -139,7 +139,7 @@ const assignNumbersAndSpaces = (array, randomArr) => {
     const counter = relativeBombArray.length;
     
     if (counter > 0) {
-      notBomb.innerHTML += `<h2 class="number">${counter}</h2>`;
+      notBomb.innerHTML += `<div class="number">${counter}</div>`;
     }
   });
 };
@@ -150,6 +150,7 @@ const onGameStart = () => {
   for (let index = 1; index < 16 ** 2 + 1; index++) {
     game.innerHTML += `<div class="game__box" id="${index}"></div>`;
   }
+  console.log(document.querySelectorAll(".game__box"))
   addGameBoxEventListeners(document.querySelectorAll(".game__box"));
 
   // Storing memory

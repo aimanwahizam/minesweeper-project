@@ -17,11 +17,21 @@
   align-items: center;
 }
 .game__box--click {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: white;
+  width: 96%;
+  height: 96%;
 }
 .game__box__icon {
-  width: 75%;
-  height: 75%;
+  width: 97%;
+  height: 97%;
+}
+
+.number {
+  font-size: 1rem;
 }
 
 /* --------------------------------- Mobile <428px--------------------------------- */
