@@ -58,10 +58,9 @@ const assignBombs = () => {
 
 const findRelativePositionByID = (id) => {
   let relativePosition = [];
-  
+
   switch (true) {
-    case (id === 1):
-      console.log("caught")
+    case id === 1:
       relativePosition = [id + 1, id + 16, id + 17];
       break;
     case id === 16:
@@ -96,7 +95,6 @@ const findRelativePositionByID = (id) => {
 
     // Rest of boxes
     default:
-      console.log("default")
       relativePosition = [
         id - 17,
         id - 16,
@@ -120,35 +118,41 @@ const assignNumbersAndSpaces = (array, randomArr) => {
   console.log(notBombsArray);
 
   notBombsArray.forEach((notBomb) => {
-    let counter = 0;
-
-    console.log(notBomb.id)
-    const relativePositionArray = findRelativePositionByID(parseInt(notBomb.id));
+    console.log(notBomb.id);
+    const relativePositionArray = findRelativePositionByID(
+      parseInt(notBomb.id)
+    );
     console.log(relativePositionArray);
-    // console.log(relativePositionArray.length);
+    console.log(randomArr);
 
-    const relativeBombArray = randomArr.filter(randomNumber => {
-      relativePositionArray.includes(randomNumber);
-    })
-    // console.log(relativeBombArray);
+    const relativeBombArray = [];
+
+    randomArr.forEach((randomNumber) => {
+      relativePositionArray.forEach((relativePosition) => {
+        randomNumber === relativePosition
+          ? relativeBombArray.push(randomNumber)
+          : null;
+      });
+    });
+    console.log(relativeBombArray);
+
+    const counter = relativeBombArray.length;
+    
+    if (counter > 0) {
+      notBomb.innerHTML += `<h2 class="number">${counter}</h2>`;
+    }
   });
-  // console.log(relativePositionArray);
-
-  // relativePositionArray.forEach((position) => {
-  //   randomArr.includes(position);
-  //   counter++;
-  // });
-  // console.log(counter);
-  // return counter;
 };
 
 // Game
 const onGameStart = () => {
+  // Creating 16x16 grid
   for (let index = 1; index < 16 ** 2 + 1; index++) {
     game.innerHTML += `<div class="game__box" id="${index}"></div>`;
   }
   addGameBoxEventListeners(document.querySelectorAll(".game__box"));
 
+  // Storing memory
   document.querySelectorAll(".game__box").forEach((box) => {
     gameBox.push(box);
   });
