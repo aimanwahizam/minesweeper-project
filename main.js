@@ -35,8 +35,7 @@ const generateRandomNumbersArray = (numberOfBombs, numberOfRows, array) => {
   }
 };
 
-const assignBombs = (gameBoxArray) => {
-  const gameBoxCopy = [...gameBoxArray];
+const assignBombs = () => {
   const randomArray = [];
   generateRandomNumbersArray(32, 16, randomArray);
   console.log(`randomArray: ${randomArray}`);
@@ -54,6 +53,11 @@ const assignBombs = (gameBoxArray) => {
   console.log(bombArray)
 };
 
+const assignNumbersAndSpaces = (array) => {
+  const notBombsArray = array.filter(box => box.className != "game__box game__box__bomb");
+  console.log(notBombsArray);
+}
+
 const onGameStart = () => {
   for (let index = 1; index < 16 ** 2 + 1; index++) {
     game.innerHTML += `<div class="game__box" id="${index}"></div>`;
@@ -64,7 +68,8 @@ const onGameStart = () => {
     gameBox.push(box);
   });
 
-  assignBombs(gameBox);
+  assignBombs();
+  assignNumbersAndSpaces(gameBox);
 };
 
 /* -------------------------------------------------------------------------- */
