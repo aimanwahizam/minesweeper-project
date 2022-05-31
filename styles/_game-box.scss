@@ -7,10 +7,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-    &--click {
-        background-color: $color-background-click;
-    }
+    // visibility: hidden;
 
     &__icon{
         width: 97%;
@@ -18,10 +15,14 @@
     }
 }
 
+.click {
+    background-color: $color-background-click;
+}
+
 .number {
     font-size: 1rem;
     font-family: $font-primary;
-    color: $color-background;
+    // color: $color-background;
 
     &--one {
         color: $color-one;

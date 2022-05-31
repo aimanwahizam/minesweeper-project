@@ -11,24 +11,24 @@
 
 .game__box {
   border: 1px solid red;
-  background-color: #6D5C80;
+  background-color: grey;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-.game__box--click {
-  background-color: #F9B38F;
 }
 .game__box__icon {
   width: 97%;
   height: 97%;
 }
 
+.click {
+  background-color: white;
+}
+
 .number {
   font-size: 1rem;
   font-family: "Press Start 2P", sans-serif;
-  color: #6D5C80;
 }
 .number--one {
   color: red;

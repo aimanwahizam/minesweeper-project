@@ -22,51 +22,54 @@ const onClickGameBox = (event) => {
     switch (true) {
       case classNames[2] === "one":
         number = 1;
-        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.className = `game__box number--${classNames[2]} click`;
         event.target.innerHTML += `${number}`;
         break;
       case classNames[2] === "two":
         number = 2;
-        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.className = `game__box number--${classNames[2]} click`;
         event.target.innerHTML += `${number}`;
         break;
       case classNames[2] === "three":
         number = 3;
-        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.className = `game__box number--${classNames[2]} click`;
         event.target.innerHTML += `${number}`;
         break;
       case classNames[2] === "four":
         number = 4;
-        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.className = `game__box number--${classNames[2]} click`;
         event.target.innerHTML += `${number}`;
         break;
       case classNames[2] === "five":
         number = 5;
-        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.className = `game__box number--${classNames[2]} click`;
         event.target.innerHTML += `${number}`;
         break;
       case classNames[2] === "six":
         number = 6;
-        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.className = `game__box number--${classNames[2]} click`;
         event.target.innerHTML += `${number}`;
         break;
       case classNames[2] === "seven":
         number = 7;
-        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.className = `game__box number--${classNames[2]} click`;
         event.target.innerHTML += `${number}`;
         break;
       case classNames[2] === "eight":
         number = 8;
-        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.className = `game__box number--${classNames[2]} click`;
         event.target.innerHTML += `${number}`;
         break;
       default:
         break;
     }
-    
+  } 
+  else if (classNames.length === 2) {
+    event.target.className += " click";
+    event.target.innerHTML +=
+      " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
+    // END GAME CONDITION LOSE
   }
-  // event.target.className += " click";
-  // console.log(event.target);
 };
 
 const addGameBoxEventListeners = (array) => {
@@ -97,12 +100,12 @@ const assignBombs = () => {
   randomArray.forEach((randomNumber) => {
     const bomb = document.getElementById(randomNumber);
     bomb.className += " game__box__bomb";
-    bomb.innerHTML +=
-      " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
+    // bomb.innerHTML +=
+    //   " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
 
     bombArray.push(bomb);
   });
-  // console.log(bombArray);
+  console.log(bombArray);
   return randomArray;
 };
 
@@ -168,12 +171,9 @@ const assignNumbersAndSpaces = (array, randomArr) => {
   console.log(notBombsArray);
 
   notBombsArray.forEach((notBomb) => {
-    // console.log(notBomb.id);
     const relativePositionArray = findRelativePositionByID(
       parseInt(notBomb.id)
     );
-    // console.log(relativePositionArray);
-    // console.log(randomArr);
 
     const relativeBombArray = [];
 
@@ -184,7 +184,6 @@ const assignNumbersAndSpaces = (array, randomArr) => {
           : null;
       });
     });
-    // console.log(relativeBombArray);
 
     const counter = relativeBombArray.length;
 
@@ -223,7 +222,6 @@ const onGameStart = () => {
   for (let index = 1; index < 16 ** 2 + 1; index++) {
     game.innerHTML += `<div class="game__box" id="${index}"></div>`;
   }
-  console.log(document.querySelectorAll(".game__box"));
   addGameBoxEventListeners(document.querySelectorAll(".game__box"));
 
   // Storing memory
