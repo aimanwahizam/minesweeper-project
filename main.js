@@ -15,8 +15,58 @@ const randomArray = [];
 
 // Clicking on boxes
 const onClickGameBox = (event) => {
-  event.target.className += " game__box--click";
-  console.log(event.target);
+  const classNames = event.target.className.split(" ");
+  let number = 0;
+
+  if (classNames.length === 3) {
+    switch (true) {
+      case classNames[2] === "one":
+        number = 1;
+        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.innerHTML += `${number}`;
+        break;
+      case classNames[2] === "two":
+        number = 2;
+        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.innerHTML += `${number}`;
+        break;
+      case classNames[2] === "three":
+        number = 3;
+        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.innerHTML += `${number}`;
+        break;
+      case classNames[2] === "four":
+        number = 4;
+        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.innerHTML += `${number}`;
+        break;
+      case classNames[2] === "five":
+        number = 5;
+        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.innerHTML += `${number}`;
+        break;
+      case classNames[2] === "six":
+        number = 6;
+        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.innerHTML += `${number}`;
+        break;
+      case classNames[2] === "seven":
+        number = 7;
+        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.innerHTML += `${number}`;
+        break;
+      case classNames[2] === "eight":
+        number = 8;
+        event.target.className = `game__box number--${classNames[2]} click`
+        event.target.innerHTML += `${number}`;
+        break;
+      default:
+        break;
+    }
+    
+  }
+  // event.target.className += " click";
+  // console.log(event.target);
 };
 
 const addGameBoxEventListeners = (array) => {
@@ -140,36 +190,28 @@ const assignNumbersAndSpaces = (array, randomArr) => {
 
     switch (true) {
       case counter === 1:
-        notBomb.className += " number--one"
-        notBomb.innerHTML += `${counter}`;
+        notBomb.className += " number one";
         break;
       case counter === 2:
-        notBomb.className += " number--two"
-        notBomb.innerHTML += `${counter}`;
+        notBomb.className += " number two";
         break;
       case counter === 3:
-        notBomb.className += " number--three"
-        notBomb.innerHTML += `${counter}`;
+        notBomb.className += " number three";
         break;
       case counter === 4:
-        notBomb.className += " number--four"
-        notBomb.innerHTML += `${counter}`;
+        notBomb.className += " number four";
         break;
       case counter === 5:
-        notBomb.className += " number--five"
-        notBomb.innerHTML += `${counter}`;
+        notBomb.className += " number five";
         break;
       case counter === 6:
-        notBomb.className += " number--six"
-        notBomb.innerHTML += `${counter}`;
+        notBomb.className += " number six";
         break;
       case counter === 7:
-        notBomb.className += " number--seven"
-        notBomb.innerHTML += `${counter}`;
+        notBomb.className += " number seven";
         break;
       case counter === 8:
-        notBomb.className += " number--eight"
-        notBomb.innerHTML += `${counter}`;
+        notBomb.className += " number eight";
         break;
     }
   });
