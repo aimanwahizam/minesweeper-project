@@ -137,31 +137,39 @@ const assignNumbersAndSpaces = (array, randomArr) => {
     // console.log(relativeBombArray);
 
     const counter = relativeBombArray.length;
-    
+
     switch (true) {
       case counter === 1:
-        notBomb.innerHTML += `<div class="number--one">${counter}</div>`;
+        notBomb.className += " number--one"
+        notBomb.innerHTML += `${counter}`;
         break;
       case counter === 2:
-        notBomb.innerHTML += `<div class="number--two">${counter}</div>`;
+        notBomb.className += " number--two"
+        notBomb.innerHTML += `${counter}`;
         break;
       case counter === 3:
-        notBomb.innerHTML += `<div class="number--three">${counter}</div>`;
+        notBomb.className += " number--three"
+        notBomb.innerHTML += `${counter}`;
         break;
       case counter === 4:
-        notBomb.innerHTML += `<div class="number--four">${counter}</div>`;
+        notBomb.className += " number--four"
+        notBomb.innerHTML += `${counter}`;
         break;
       case counter === 5:
-        notBomb.innerHTML += `<div class="number--five">${counter}</div>`;
+        notBomb.className += " number--five"
+        notBomb.innerHTML += `${counter}`;
         break;
       case counter === 6:
-        notBomb.innerHTML += `<div class="number--six">${counter}</div>`;
+        notBomb.className += " number--six"
+        notBomb.innerHTML += `${counter}`;
         break;
       case counter === 7:
-        notBomb.innerHTML += `<div class="number--seven">${counter}</div>`;
+        notBomb.className += " number--seven"
+        notBomb.innerHTML += `${counter}`;
         break;
       case counter === 8:
-        notBomb.innerHTML += `<div class="number--eight">${counter}</div>`;
+        notBomb.className += " number--eight"
+        notBomb.innerHTML += `${counter}`;
         break;
     }
   });
@@ -173,7 +181,7 @@ const onGameStart = () => {
   for (let index = 1; index < 16 ** 2 + 1; index++) {
     game.innerHTML += `<div class="game__box" id="${index}"></div>`;
   }
-  console.log(document.querySelectorAll(".game__box"))
+  console.log(document.querySelectorAll(".game__box"));
   addGameBoxEventListeners(document.querySelectorAll(".game__box"));
 
   // Storing memory

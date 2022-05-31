@@ -9,13 +9,7 @@
     align-items: center;
 
     &--click {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
         background-color: $color-background-click;
-        width: 96%;
-        height: 96%;
     }
 
     &__icon{
