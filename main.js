@@ -15,60 +15,161 @@ const randomArray = [];
 
 // Clicking on boxes
 const onClickGameBox = (event) => {
+  const gameBoxCopy = [...gameBox];
   const classNames = event.target.className.split(" ");
-  let number = 0;
 
   if (classNames.length === 3) {
-    switch (true) {
-      case classNames[2] === "one":
-        number = 1;
-        event.target.className = `game__box number--${classNames[2]} click`;
-        event.target.innerHTML += `${number}`;
-        break;
-      case classNames[2] === "two":
-        number = 2;
-        event.target.className = `game__box number--${classNames[2]} click`;
-        event.target.innerHTML += `${number}`;
-        break;
-      case classNames[2] === "three":
-        number = 3;
-        event.target.className = `game__box number--${classNames[2]} click`;
-        event.target.innerHTML += `${number}`;
-        break;
-      case classNames[2] === "four":
-        number = 4;
-        event.target.className = `game__box number--${classNames[2]} click`;
-        event.target.innerHTML += `${number}`;
-        break;
-      case classNames[2] === "five":
-        number = 5;
-        event.target.className = `game__box number--${classNames[2]} click`;
-        event.target.innerHTML += `${number}`;
-        break;
-      case classNames[2] === "six":
-        number = 6;
-        event.target.className = `game__box number--${classNames[2]} click`;
-        event.target.innerHTML += `${number}`;
-        break;
-      case classNames[2] === "seven":
-        number = 7;
-        event.target.className = `game__box number--${classNames[2]} click`;
-        event.target.innerHTML += `${number}`;
-        break;
-      case classNames[2] === "eight":
-        number = 8;
-        event.target.className = `game__box number--${classNames[2]} click`;
-        event.target.innerHTML += `${number}`;
-        break;
-      default:
-        break;
-    }
-  } 
-  else if (classNames.length === 2) {
+    onNumberClick(classNames, event.target);
+  } else if (classNames.length === 2) {
     event.target.className += " click";
     event.target.innerHTML +=
       " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
     // END GAME CONDITION LOSE
+    // alert("BOOOM");
+  } else if (classNames.length === 1) {
+    // TRYING TO GET SPREAD OF BLANKS TILL HIT NUMBERS WORKING
+
+    let cumulativeSurroundingBlanksID = [];
+
+    event.target.className += " click click--blank";
+
+    const relativePosition = findRelativePositionByID(
+      parseInt(event.target.id)
+    );
+
+    relativePosition.forEach((position) => {
+      const surroundingGameBox = gameBoxCopy[position - 1];
+      const classNamesAroundBlanks = surroundingGameBox.className.split(" ");
+
+      console.log(surroundingGameBox);
+      console.log(classNamesAroundBlanks.length);
+      if (classNamesAroundBlanks.length === 1) {
+        surroundingGameBox.className += " click click--blank";
+
+        if (surroundingGameBox.className === "game__box click click--blank") {
+          const relativePositionAroundReveal = findRelativePositionByID(
+            parseInt(surroundingGameBox.id)
+          );
+          console.log({ relativePositionAroundReveal });
+          cumulativeSurroundingBlanksID.push(relativePositionAroundReveal);
+          console.log({ cumulativeSurroundingBlanksID });
+        }
+      } else if (classNamesAroundBlanks.length === 3) {
+        onNumberClick(classNamesAroundBlanks, surroundingGameBox);
+      }
+    });
+
+    const cumulativeSurroundingBlanksIDArray =
+      cumulativeSurroundingBlanksID.flat();
+    // Make sure numbers are unique
+    const uniqueSurroundingIDArray = [
+      ...new Set(cumulativeSurroundingBlanksIDArray),
+    ];
+
+    // console.log(cumulativeSurroundingBlanksIDArray);
+    // console.log(uniqueSurroundingIDArray);
+
+    let counter = 0;
+
+    while (counter <= uniqueSurroundingIDArray.length) {
+      // Click on all of surrounding boxes
+      // If number, click and show and DONT ADD surrounding numbers to array
+      // if blank, click and show and DO ADD surrounding numbers to array
+      // keep doing this till all surrounding tiles has been clicked i.e. counter > unique.lenght
+
+      uniqueSurroundingIDArray.forEach((id) => {
+        if (!gameBoxCopy[id - 1].className.includes("click")) {
+          const surroundingBoxClassNames =
+            gameBoxCopy[id - 1].className.split(" ");
+          if (surroundingBoxClassNames.length === 3) {
+            onNumberClick(surroundingBoxClassNames, gameBoxCopy[id - 1]);
+          } else {
+            gameBoxCopy[id - 1].className += " click click--blank";
+
+            const relativePositionSecondLevel = findRelativePositionByID(
+              parseInt(gameBoxCopy[id - 1].id)
+            );
+
+            relativePositionSecondLevel.forEach((position) => {
+              const surroundingGameBoxSecondLevel = gameBoxCopy[position - 1];
+              const classNamesAroundBlanksSecondLevel =
+                surroundingGameBoxSecondLevel.className.split(" ");
+
+              console.log(surroundingGameBoxSecondLevel);
+              console.log(classNamesAroundBlanksSecondLevel.length);
+              if (classNamesAroundBlanksSecondLevel.length === 1) {
+                surroundingGameBoxSecondLevel.className +=
+                  " click click--blank";
+
+                if (
+                  surroundingGameBoxSecondLevel.className ===
+                  "game__box click click--blank"
+                ) {
+                  const relativePositionAroundReveal = findRelativePositionByID(
+                    parseInt(surroundingGameBoxSecondLevel.id)
+                  );
+                  console.log({ relativePositionAroundReveal });
+                  cumulativeSurroundingBlanksID.push(
+                    relativePositionAroundReveal
+                  );
+                  console.log({ cumulativeSurroundingBlanksID });
+                }
+              }
+            });
+          }
+        }
+        counter++;
+      });
+    }
+  }
+};
+
+const onNumberClick = (classNameArray, box) => {
+  let value = 0;
+
+  switch (true) {
+    case classNameArray[2] === "one":
+      value = 1;
+      box.className = `game__box number--${classNameArray[2]} click`;
+      box.innerHTML += `${value}`;
+      break;
+    case classNameArray[2] === "two":
+      value = 2;
+      box.className = `game__box number--${classNameArray[2]} click`;
+      box.innerHTML += `${value}`;
+      break;
+    case classNameArray[2] === "three":
+      value = 3;
+      box.className = `game__box number--${classNameArray[2]} click`;
+      box.innerHTML += `${value}`;
+      break;
+    case classNameArray[2] === "four":
+      value = 4;
+      box.className = `game__box number--${classNameArray[2]} click`;
+      box.innerHTML += `${value}`;
+      break;
+    case classNameArray[2] === "five":
+      value = 5;
+      box.className = `game__box number--${classNameArray[2]} click`;
+      box.innerHTML += `${value}`;
+      break;
+    case classNameArray[2] === "six":
+      value = 6;
+      box.className = `game__box number--${classNameArray[2]} click`;
+      box.innerHTML += `${value}`;
+      break;
+    case classNameArray[2] === "seven":
+      value = 7;
+      box.className = `game__box number--${classNameArray[2]} click`;
+      box.innerHTML += `${value}`;
+      break;
+    case classNameArray[2] === "eight":
+      value = 8;
+      box.className = `game__box number--${classNameArray[2]} click`;
+      box.innerHTML += `${value}`;
+      break;
+    default:
+      break;
   }
 };
 
@@ -92,7 +193,6 @@ const generateRandomNumbersArray = (numberOfBombs, numberOfRows, array) => {
 
 const assignBombs = () => {
   generateRandomNumbersArray(32, 16, randomArray);
-  // console.log(`randomArray: ${randomArray}`);
 
   // foreach gamebox if id matches random number ADD class of bomb
   const bombArray = [];
@@ -100,12 +200,10 @@ const assignBombs = () => {
   randomArray.forEach((randomNumber) => {
     const bomb = document.getElementById(randomNumber);
     bomb.className += " game__box__bomb";
-    // bomb.innerHTML +=
-    //   " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
-
     bombArray.push(bomb);
   });
-  console.log(bombArray);
+
+  // console.log(bombArray);
   return randomArray;
 };
 
@@ -113,6 +211,7 @@ const findRelativePositionByID = (id) => {
   let relativePosition = [];
 
   switch (true) {
+    //Corners
     case id === 1:
       relativePosition = [id + 1, id + 16, id + 17];
       break;
@@ -168,7 +267,7 @@ const assignNumbersAndSpaces = (array, randomArr) => {
   const notBombsArray = array.filter(
     (box) => box.className != "game__box game__box__bomb"
   );
-  console.log(notBombsArray);
+  // console.log(notBombsArray);
 
   notBombsArray.forEach((notBomb) => {
     const relativePositionArray = findRelativePositionByID(
@@ -212,6 +311,7 @@ const assignNumbersAndSpaces = (array, randomArr) => {
       case counter === 8:
         notBomb.className += " number eight";
         break;
+      // default:
     }
   });
 };
