@@ -6,6 +6,7 @@ const body = document.querySelector("body");
 const game = document.querySelector(".game");
 const gameBox = []; // ARRAY OF BOXES TO BE STORED
 const startButton = document.querySelector(".start-button");
+const resetButton = document.querySelector(".reset-button");
 
 const randomArray = [];
 
@@ -25,49 +26,11 @@ const onClickGameBox = (event) => {
     event.target.innerHTML +=
       " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
     // END GAME CONDITION LOSE
-    // alert("BOOOM");
+    alert("BOOOM");
   } else if (classNames.length === 1) {
     // TRYING TO GET SPREAD OF BLANKS TILL HIT NUMBERS WORKING
 
-    let cumulativeSurroundingBlanksID = [];
-
-    event.target.className += " click click--blank";
-
-    const relativePosition = findRelativePositionByID(
-      parseInt(event.target.id)
-    );
-
-    relativePosition.forEach((position) => {
-      const surroundingGameBox = gameBoxCopy[position - 1];
-      const classNamesAroundBlanks = surroundingGameBox.className.split(" ");
-
-      console.log(surroundingGameBox);
-      console.log(classNamesAroundBlanks.length);
-      if (classNamesAroundBlanks.length === 1) {
-        surroundingGameBox.className += " click click--blank";
-
-        if (surroundingGameBox.className === "game__box click click--blank") {
-          const relativePositionAroundReveal = findRelativePositionByID(
-            parseInt(surroundingGameBox.id)
-          );
-          console.log({ relativePositionAroundReveal });
-          cumulativeSurroundingBlanksID.push(relativePositionAroundReveal);
-          console.log({ cumulativeSurroundingBlanksID });
-        }
-      } else if (classNamesAroundBlanks.length === 3) {
-        onNumberClick(classNamesAroundBlanks, surroundingGameBox);
-      }
-    });
-
-    const cumulativeSurroundingBlanksIDArray =
-      cumulativeSurroundingBlanksID.flat();
-    // Make sure numbers are unique
-    const uniqueSurroundingIDArray = [
-      ...new Set(cumulativeSurroundingBlanksIDArray),
-    ];
-
-    // console.log(cumulativeSurroundingBlanksIDArray);
-    // console.log(uniqueSurroundingIDArray);
+    const uniqueSurroundingIDArray = onBlankClick(event.target, gameBoxCopy);
 
     let counter = 0;
 
@@ -75,7 +38,7 @@ const onClickGameBox = (event) => {
       // Click on all of surrounding boxes
       // If number, click and show and DONT ADD surrounding numbers to array
       // if blank, click and show and DO ADD surrounding numbers to array
-      // keep doing this till all surrounding tiles has been clicked i.e. counter > unique.lenght
+      // keep doing this till all surrounding tiles has been clicked i.e. counter > unique.length
 
       uniqueSurroundingIDArray.forEach((id) => {
         if (!gameBoxCopy[id - 1].className.includes("click")) {
@@ -84,44 +47,50 @@ const onClickGameBox = (event) => {
           if (surroundingBoxClassNames.length === 3) {
             onNumberClick(surroundingBoxClassNames, gameBoxCopy[id - 1]);
           } else {
-            gameBoxCopy[id - 1].className += " click click--blank";
+            let blankBox = gameBoxCopy[id - 1];
 
-            const relativePositionSecondLevel = findRelativePositionByID(
-              parseInt(gameBoxCopy[id - 1].id)
-            );
-
-            relativePositionSecondLevel.forEach((position) => {
-              const surroundingGameBoxSecondLevel = gameBoxCopy[position - 1];
-              const classNamesAroundBlanksSecondLevel =
-                surroundingGameBoxSecondLevel.className.split(" ");
-
-              console.log(surroundingGameBoxSecondLevel);
-              console.log(classNamesAroundBlanksSecondLevel.length);
-              if (classNamesAroundBlanksSecondLevel.length === 1) {
-                surroundingGameBoxSecondLevel.className +=
-                  " click click--blank";
-
-                if (
-                  surroundingGameBoxSecondLevel.className ===
-                  "game__box click click--blank"
-                ) {
-                  const relativePositionAroundReveal = findRelativePositionByID(
-                    parseInt(surroundingGameBoxSecondLevel.id)
-                  );
-                  console.log({ relativePositionAroundReveal });
-                  cumulativeSurroundingBlanksID.push(
-                    relativePositionAroundReveal
-                  );
-                  console.log({ cumulativeSurroundingBlanksID });
-                }
-              }
-            });
+            onBlankClick(blankBox, gameBoxCopy);
           }
         }
         counter++;
       });
     }
   }
+};
+
+const onBlankClick = (box, gameBoxArray) => {
+  let surroundingArr = [];
+
+  box.className += " click click--blank";
+
+  const relativePosition = findRelativePositionByID(parseInt(box.id));
+
+  relativePosition.forEach((position) => {
+    const surroundingGameBox = gameBoxArray[position - 1];
+    const classNamesAroundBlanks = surroundingGameBox.className.split(" ");
+
+    console.log(surroundingGameBox);
+    console.log(classNamesAroundBlanks.length);
+    if (classNamesAroundBlanks.length === 1) {
+      surroundingGameBox.className += " click click--blank";
+
+      if (surroundingGameBox.className === "game__box click click--blank") {
+        const relativePositionAroundReveal = findRelativePositionByID(
+          parseInt(surroundingGameBox.id)
+        );
+        console.log({ relativePositionAroundReveal });
+        surroundingArr.push(relativePositionAroundReveal);
+        console.log({ surroundingArr });
+      }
+    } else if (classNamesAroundBlanks.length === 3) {
+      onNumberClick(classNamesAroundBlanks, surroundingGameBox);
+    }
+  });
+
+  const surroundingArrFlat = surroundingArr.flat();
+  // Make sure numbers are unique
+  const uniqueSurroundingArrFlat = [...new Set(surroundingArrFlat)];
+  return uniqueSurroundingArrFlat;
 };
 
 const onNumberClick = (classNameArray, box) => {
