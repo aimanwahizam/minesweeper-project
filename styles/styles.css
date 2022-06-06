@@ -11,6 +11,12 @@
   margin: 1.5rem;
 }
 
+.button {
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  background-color: pink;
+}
+
 * {
   margin: 0;
   padding: 0;
