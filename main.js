@@ -19,15 +19,21 @@ const onClickGameBox = (event) => {
   const gameBoxCopy = [...gameBox];
   const classNames = event.target.className.split(" ");
 
+  // Check to see how many classes the boxes have
+  // Number
   if (classNames.length === 3) {
     onNumberClick(classNames, event.target);
-  } else if (classNames.length === 2) {
+  }
+  // Bomb
+  else if (classNames.length === 2) {
     event.target.className += " click";
     event.target.innerHTML +=
       " <img src='./images/bomb-icon.png' alt='Bomb' class='game__box__icon'>";
     // END GAME CONDITION LOSE
     alert("BOOOM");
-  } else if (classNames.length === 1) {
+  }
+  // Blank
+  else if (classNames.length === 1) {
     // TRYING TO GET SPREAD OF BLANKS TILL HIT NUMBERS WORKING
 
     const uniqueSurroundingIDArray = onBlankClick(event.target, gameBoxCopy);
@@ -69,8 +75,8 @@ const onBlankClick = (box, gameBoxArray) => {
     const surroundingGameBox = gameBoxArray[position - 1];
     const classNamesAroundBlanks = surroundingGameBox.className.split(" ");
 
-    console.log(surroundingGameBox);
-    console.log(classNamesAroundBlanks.length);
+    // Check to see what surrounding boxes are by number of classes
+    // Blank
     if (classNamesAroundBlanks.length === 1) {
       surroundingGameBox.className += " click click--blank";
 
@@ -78,15 +84,16 @@ const onBlankClick = (box, gameBoxArray) => {
         const relativePositionAroundReveal = findRelativePositionByID(
           parseInt(surroundingGameBox.id)
         );
-        console.log({ relativePositionAroundReveal });
         surroundingArr.push(relativePositionAroundReveal);
-        console.log({ surroundingArr });
       }
-    } else if (classNamesAroundBlanks.length === 3) {
+    } 
+    // Number
+    else if (classNamesAroundBlanks.length === 3) {
       onNumberClick(classNamesAroundBlanks, surroundingGameBox);
     }
   });
 
+  // Array of all surrounding box IDs
   const surroundingArrFlat = surroundingArr.flat();
   // Make sure numbers are unique
   const uniqueSurroundingArrFlat = [...new Set(surroundingArrFlat)];
@@ -172,7 +179,6 @@ const assignBombs = () => {
     bombArray.push(bomb);
   });
 
-  // console.log(bombArray);
   return randomArray;
 };
 
@@ -236,7 +242,6 @@ const assignNumbersAndSpaces = (array, randomArr) => {
   const notBombsArray = array.filter(
     (box) => box.className != "game__box game__box__bomb"
   );
-  // console.log(notBombsArray);
 
   notBombsArray.forEach((notBomb) => {
     const relativePositionArray = findRelativePositionByID(
