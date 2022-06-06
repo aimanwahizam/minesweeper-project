@@ -1,4 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-family: "Press Start 2P", sans-serif;
+  margin: 1.5rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +19,10 @@
 .information {
   display: flex;
   flex-direction: row;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  width: 60%;
 }
 
 .game__box {
@@ -28,31 +44,38 @@
 
 .number {
   font-size: 1rem;
-  font-family: "Press Start 2P", sans-serif;
 }
 .number--one {
   color: red;
+  font-family: "Press Start 2P", sans-serif;
 }
 .number--two {
   color: orange;
+  font-family: "Press Start 2P", sans-serif;
 }
 .number--three {
   color: yellow;
+  font-family: "Press Start 2P", sans-serif;
 }
 .number--four {
   color: green;
+  font-family: "Press Start 2P", sans-serif;
 }
 .number--five {
   color: blue;
+  font-family: "Press Start 2P", sans-serif;
 }
 .number--six {
   color: indigo;
+  font-family: "Press Start 2P", sans-serif;
 }
 .number--seven {
   color: violet;
+  font-family: "Press Start 2P", sans-serif;
 }
 .number--eight {
   color: pink;
+  font-family: "Press Start 2P", sans-serif;
 }
 
 /* --------------------------------- Mobile <428px--------------------------------- */

@@ -1,58 +1,64 @@
 @use "./variables" as *;
 
 .game__box {
-    border: 1px solid red;
-    background-color: $color-background;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    // visibility: hidden;
+  border: 1px solid red;
+  background-color: $color-background;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // visibility: hidden;
 
-    &__icon{
-        width: 97%;
-        height: 97%;
-    }
+  &__icon {
+    width: 97%;
+    height: 97%;
+  }
 }
 
 .click {
-    background-color: $color-background-click;
+  background-color: $color-background-click;
 }
 
 .number {
-    font-size: 1rem;
+  font-size: 1rem;
+
+  &--one {
+    color: $color-one;
     font-family: $font-primary;
-    // color: $color-background;
+  }
 
-    &--one {
-        color: $color-one;
-    }
+  &--two {
+    color: $color-two;
+    font-family: $font-primary;
+  }
 
-    &--two {
-        color: $color-two;
-    }
+  &--three {
+    color: $color-three;
+    font-family: $font-primary;
+  }
 
-    &--three {
-        color: $color-three;
-    }
+  &--four {
+    color: $color-four;
+    font-family: $font-primary;
+  }
 
-    &--four {
-        color: $color-four;
-    }
+  &--five {
+    color: $color-five;
+    font-family: $font-primary;
+  }
 
-    &--five {
-        color: $color-five;
-    }
+  &--six {
+    color: $color-six;
+    font-family: $font-primary;
+  }
 
-    &--six {
-        color: $color-six;
-    }
+  &--seven {
+    color: $color-seven;
+    font-family: $font-primary;
+  }
 
-    &--seven {
-        color: $color-seven;
-    }
-
-    &--eight {
-        color: $color-eight;
-    }
+  &--eight {
+    color: $color-eight;
+    font-family: $font-primary;
+  }
 }

@@ -4,7 +4,7 @@
 
 const body = document.querySelector("body");
 const game = document.querySelector(".game");
-const gameBox = []; // ARRAY OF BOXES TO BE STORED
+let gameBox = []; // ARRAY OF BOXES TO BE STORED
 const startButton = document.querySelector(".start-button");
 const resetButton = document.querySelector(".reset-button");
 
@@ -34,7 +34,7 @@ const onClickGameBox = (event) => {
 
     let counter = 0;
 
-    while (counter <= uniqueSurroundingIDArray.length) {
+    while (counter < uniqueSurroundingIDArray.length) {
       // Click on all of surrounding boxes
       // If number, click and show and DONT ADD surrounding numbers to array
       // if blank, click and show and DO ADD surrounding numbers to array
@@ -302,8 +302,14 @@ const onGameStart = () => {
   assignNumbersAndSpaces(gameBox, randomArray);
 };
 
+const onResetPush = () => {
+  gameBox = [];
+  onGameStart();
+};
+
 /* -------------------------------------------------------------------------- */
 /*                               Event Listeners                              */
 /* -------------------------------------------------------------------------- */
 
 startButton.addEventListener("click", onGameStart);
+resetButton.addEventListener("click", onResetPush);

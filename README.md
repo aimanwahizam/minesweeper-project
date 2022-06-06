@@ -1,5 +1,12 @@
 # minesweeper-project
-Game project for _nology Week 3 - JS, HTML and CSS
+Game project for _nology Week 3/4 - JS, HTML and CSS
+
+This is a minesweeper game created in JS, HTML and CSS. In its current state, the game generates a 16x16 grid with a randomly generated distribution of bombs laid on top. With this the appropriate value was given to surrounding game cells which corresponds to the number of bombs surrounding it.
+
+Here, the game is to click on all non-bomb tile with the win condition triggered if all that's left are unclicked bombs. If a player does manage to press on a bomb, then it will be instant game over.
+
+Below are pseudocode to aid in the development stage of the project. Future implementations and further notes are also found on notion: https://www.notion.so/Minesweeper-Project-439aea256f484c8898f05e87bf4b221f
+
 
 ## Dev notes
 (*FOR LATER*)
